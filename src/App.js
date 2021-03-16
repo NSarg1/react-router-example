@@ -1,37 +1,31 @@
 import "./App.css";
 import React from "react";
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
+import Login from "./components/login/Login.component";
+import Home from "./components/home/Home.component";
 
-function App() {
-    return (
-        <BrowserRouter>
-            <div className="App">
-                <ul>
-                    <li>
-                        <Link to="/">Home</Link>
-                    </li>
-                    <li>
-                        <Link to="/about">About</Link>
-                    </li>
-                    <li>
-                        <Link to="/users">Users</Link>
-                    </li>
-                </ul>
+class App extends React.Component {
+    state = {
+        isLoggedIn: false,
+    };
 
-                <Switch>
-                    <Route path="/about">
-                        <h1>About page</h1>
-                    </Route>
-                    <Route path="/users">
-                        <h1>Users page</h1>
-                    </Route>
-                    <Route path="/">
-                        <h1>Home page</h1>
-                    </Route>
-                </Switch>
-            </div>
-        </BrowserRouter>
-    );
+    render() {
+        return (
+            <Router>
+                <div className="app">
+                    <Switch>
+                        <Route component={Home} path="/home" />
+                        <Route component={Login} path="/" />
+                    </Switch>
+
+                    <div>
+                        <Link to="/login">To login</Link>
+                        <Link to="/home">To home</Link>
+                    </div>
+                </div>
+            </Router>
+        );
+    }
 }
 
 export default App;
